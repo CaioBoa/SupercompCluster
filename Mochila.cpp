@@ -31,7 +31,7 @@ Mochila calculaMochila(const std::vector<Item>& items, int capacidade) {
 int main() {
     auto start = std::chrono::high_resolution_clock::now();
 
-    std::ifstream infile("Entrada1.txt");
+    std::ifstream infile("Entrada2.txt");
     if (!infile.is_open()) {
         std::cerr << "Erro ao abrir o arquivo" << std::endl;
         return 1;
