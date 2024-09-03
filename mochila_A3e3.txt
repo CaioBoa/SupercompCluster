@@ -1,0 +1,12 @@
+Valor máximo: 3320
+Capacidade Utilizada: 405
+Tempo de execução: 0.00111936s
+Valor máximo: 3320
+Capacidade Utilizada: 405
+Tempo de execução: 0.00153723s
+Valor máximo: 3320
+Capacidade Utilizada: 405
+Tempo de execução: 3.9976e-05s
+Valor máximo: 3320
+Capacidade Utilizada: 405
+Tempo de execução: 4.204e-05s

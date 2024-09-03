@@ -1,0 +1,12 @@
+Valor máximo que pode ser obtido: 648
+Capacidade restante: 0
+Tempo de execução: 11.2461s
+Valor máximo que pode ser obtido: 648
+Capacidade restante: 0
+Tempo de execução: 11.2443s
+Valor máximo que pode ser obtido: 648
+Capacidade restante: 0
+Tempo de execução: 11.2852s
+Valor máximo que pode ser obtido: 648
+Capacidade restante: 0
+Tempo de execução: 11.3394s
