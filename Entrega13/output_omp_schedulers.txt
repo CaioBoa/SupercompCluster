@@ -1,0 +1,98 @@
+default:               
+****************                                                
+                ****************                                
+                                ****************                
+                                                ****************
+
+Time for default:               : 0.000130339 seconds
+schedule(static):      
+****************                                                
+                ****************                                
+                                ****************                
+                                                ****************
+
+Time for schedule(static):      : 2.7772e-06 seconds
+schedule(static, 4):   
+****            ****            ****            ****            
+    ****            ****            ****            ****        
+        ****            ****            ****            ****    
+            ****            ****            ****            ****
+
+Time for schedule(static, 4):   : 2.89921e-06 seconds
+schedule(static, 8):   
+********                        ********                        
+        ********                        ********                
+                ********                        ********        
+                        ********                        ********
+
+Time for schedule(static, 8):   : 2.70642e-06 seconds
+schedule(dynamic):     
+   *   *   *  * *  *    * * *    *  * *   *  *     * *  * *    *
+  *   *   *       * *          *  *  * *          *      *  *   
+ *   *  *    * *     *   *   *  *        *  *    *     *   *  * 
+*   *    *  *    *    **   *  *    *    *  *  ***   * *      *  
+
+Time for schedule(dynamic):     : 6.04987e-06 seconds
+schedule(dynamic, 1):  
+  *  *   *  *  *    *   * * *   *  * **    *  ** *    *    * *  
+ *    *      *       * *      *  *      *   *       **   *  *  *
+   *   *      *    *  *    * *      *    *        *    *  *   * 
+*   *   * **    ***      *     *  *    *  *  *  *  *    *       
+
+Time for schedule(dynamic, 1):  : 5.10458e-06 seconds
+schedule(dynamic, 4):  
+            ****    ****        ****            ****    ****    
+        ****                ****            ****                
+    ****                            ****                    ****
+****            ****    ****            ****        ****        
+
+Time for schedule(dynamic, 4):  : 3.37884e-06 seconds
+schedule(dynamic, 8):  
+                ********                ********                
+        ********                                ********        
+                        ********                                
+********                        ********                ********
+
+Time for schedule(dynamic, 8):  : 3.10689e-06 seconds
+schedule(guided):      
+                                     ************       **   *  
+****************                                 ****       *  *
+                ************                                    
+                            *********                ***  **  * 
+
+Time for schedule(guided):      : 4.10061e-06 seconds
+schedule(guided, 2):   
+****************                                 *******        
+                                     *******              **    
+                            *********                   **  **  
+                ************                *****             **
+
+Time for schedule(guided, 2):   : 3.15066e-06 seconds
+schedule(guided, 4):   
+                                     ************        *******
+****************                                                
+                            *********                           
+                ************                     ********       
+
+Time for schedule(guided, 4):   : 3.09385e-06 seconds
+schedule(guided, 8):   
+                                     ****************        ***
+****************                                                
+                            *********                           
+                ************                         ********   
+
+Time for schedule(guided, 8):   : 2.94298e-06 seconds
+schedule(auto):        
+****************                                                
+                ****************                                
+                                ****************                
+                                                ****************
+
+Time for schedule(auto):        : 2.62167e-06 seconds
+schedule(runtime):     
+   *   * *   * *   * * *   *  *   * *   **        *  *       *  
+*   *   *   * *     * *   *  *        *        *    * *** *   * 
+ *   *    *      *      *      * *   *       *           *  *   
+  *   *    *    * *      *  *   *  *   *  *** * ** *       *   *
+
+Time for schedule(runtime):     : 4.94719e-06 seconds
