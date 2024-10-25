@@ -1,0 +1,9 @@
+Processo raiz define o número de iterações: 100
+Processo 0 recebeu o número de iterações: 100
+Processo 0 calculou a soma de 1 até 100: 5050
+Processo 2 recebeu o número de iterações: 100
+Processo 2 calculou a soma de 1 até 100: 5050
+Processo 1 recebeu o número de iterações: 100
+Processo 1 calculou a soma de 1 até 100: 5050
+Processo 3 recebeu o número de iterações: 100
+Processo 3 calculou a soma de 1 até 100: 5050

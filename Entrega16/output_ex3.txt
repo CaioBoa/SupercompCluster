@@ -1,0 +1,3 @@
+Array original no processo raiz: 74 21 20 87 73 80 19 68 26 74 85 41 40 66 20 8 
+Valor máximo encontrado no processo raiz: 87
+Array normalizado no processo raiz: 0.850575 0.241379 0.229885 1 0.83908 0.91954 0.218391 0.781609 0.298851 0.850575 0.977012 0.471264 0.45977 0.758621 0.229885 0.091954 

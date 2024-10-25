@@ -1,0 +1,6 @@
+Array inicial no processo raiz: 66 52 17 67 72 13 75 83 9 92 21 94 15 91 20 36 
+Processo 0 recebeu os elementos: 66 52 17 67 e calculou a média local: 50.5
+A média global do array é: 51.4375
+Processo 2 recebeu os elementos: 9 92 21 94 e calculou a média local: 54
+Processo 1 recebeu os elementos: 72 13 75 83 e calculou a média local: 60.75
+Processo 3 recebeu os elementos: 15 91 20 36 e calculou a média local: 40.5
