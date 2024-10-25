@@ -1,0 +1,12 @@
+Processo 0 enviando mensagem para o processo 1
+Processo 0 recebeu resposta do processo 1: 10
+Processo 0 enviando mensagem para o processo 2
+Processo 0 recebeu resposta do processo 2: 20
+Processo 0 enviando mensagem para o processo 3
+Processo 1 recebeu mensagem do processo 0
+Processo 1 enviou resposta para o processo 0: 10
+Processo 2 recebeu mensagem do processo 0
+Processo 2 enviou resposta para o processo 0: 20
+Processo 3 recebeu mensagem do processo 0
+Processo 3 enviou resposta para o processo 0: 30
+Processo 0 recebeu resposta do processo 3: 30

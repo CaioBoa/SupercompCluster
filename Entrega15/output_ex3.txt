@@ -1,0 +1,5 @@
+Processo 0 enviou a mensagem: 100 para o processo 1
+Processo 1 recebeu a mensagem: 100 do processo 0
+Processo 2 recebeu a mensagem: 100 do processo 1
+Processo 3 recebeu a mensagem: 100 do processo 2
+Processo 3 é o último e exibiu a mensagem: 100

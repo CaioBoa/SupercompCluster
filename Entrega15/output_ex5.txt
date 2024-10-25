@@ -1,0 +1,5 @@
+Processo 0 inicia com valor: 1
+Processo 1 recebeu soma 1 e somou seu valor 2 = 3
+Processo 2 recebeu soma 3 e somou seu valor 3 = 6
+Processo 3 recebeu soma 6 e somou seu valor 4 = 10
+Processo 3 é o último e a soma total é: 10
