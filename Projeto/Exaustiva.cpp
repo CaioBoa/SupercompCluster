@@ -2,8 +2,10 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
+using namespace chrono;
 
 // Função para ler o grafo de um arquivo e armazená-lo como uma matriz de adjacência
 vector<vector<int>> LerGrafo(const string& nomeArquivo, int& numVertices) {
@@ -64,18 +66,33 @@ int main() {
     int numVertices;
     string nomeArquivo = "grafo.txt";
 
+    // Inicia o temporizador
+    auto inicio = high_resolution_clock::now();
+
     // Lê o grafo do arquivo
     vector<vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
 
     // Encontra a clique máxima
     vector<int> cliqueMaxima = EncontrarCliqueMaxima(grafo, numVertices);
 
+    // Finaliza o temporizador
+    auto fim = high_resolution_clock::now();
+    auto duracao = duration_cast<milliseconds>(fim - inicio);
+
     // Exibe o resultado
-    cout << "Clique máxima encontrada:\n";
-    for (int v : cliqueMaxima) {
-        cout << v + 1 << " ";  // Ajuste para exibir índices a partir de 1
+    if (!cliqueMaxima.empty()) {
+        cout << "Clique máxima encontrada:\n";
+        for (int v : cliqueMaxima) {
+            cout << v + 1 << " ";  // Ajuste para exibir índices a partir de 1
+        }
+        cout << endl;
+    } else {
+        cout << "Nenhuma clique encontrada.\n";
     }
-    cout << endl;
+
+    // Exibe o tempo de execução
+    cout << "Tempo de execução: " << duracao.count() << " ms" << endl;
 
     return 0;
 }
+
