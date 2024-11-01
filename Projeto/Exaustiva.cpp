@@ -1,109 +1,101 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <algorithm>
 #include <chrono>
-#include <set>
+#include <string>
+#include <fstream> // Inclui fstream para uso do ifstream
+#include <iomanip> // Para manipular casas decimais
 
-using namespace std;
-using namespace chrono;
+// Função para ler o grafo a partir do arquivo de entrada
+std::vector<std::vector<int>> LerGrafo(const std::string& nomeArquivo, int& numVertices) {
+    std::ifstream arquivo(nomeArquivo);
+    if (!arquivo.is_open()) {
+        std::cerr << "Erro ao abrir o arquivo " << nomeArquivo << std::endl;
+        return {};
+    }
 
-// Função para ler o grafo de um arquivo e armazená-lo como uma matriz de adjacência
-vector<vector<int>> LerGrafo(const string& nomeArquivo, int& numVertices) {
-    ifstream arquivo(nomeArquivo);
     int numArestas;
     arquivo >> numVertices >> numArestas;
 
-    vector<vector<int>> grafo(numVertices, vector<int>(numVertices, 0));
+    // Inicializa a matriz de adjacência com 0s
+    std::vector<std::vector<int>> grafo(numVertices, std::vector<int>(numVertices, 0));
 
+    // Lê as arestas e preenche a matriz de adjacência
     for (int i = 0; i < numArestas; ++i) {
         int u, v;
         arquivo >> u >> v;
         grafo[u - 1][v - 1] = 1;
-        grafo[v - 1][u - 1] = 1;
+        grafo[v - 1][u - 1] = 1;  // Grafo não direcionado
     }
+
     arquivo.close();
-    
-    // Imprimindo a matriz de adjacência para depuração
-    cout << "Matriz de Adjacência:" << endl;
-    for (int i = 0; i < numVertices; ++i) {
-        for (int j = 0; j < numVertices; ++j) {
-            cout << grafo[i][j] << " ";
-        }
-        cout << endl;
-    }
     return grafo;
 }
 
-// Função para verificar se todos os vértices em um conjunto estão conectados (formam uma clique)
-bool EhClique(const vector<vector<int>>& grafo, const vector<int>& vertices) {
-    cout << "Verificando o conjunto: ";
-    for (int v : vertices) cout << v + 1 << " ";
-    cout << endl;
+// Função recursiva para explorar todas as combinações e encontrar a clique máxima
+void BuscaCliqueMaxima(const std::vector<std::vector<int>>& grafo, std::vector<int>& atualClique, 
+                       std::vector<int>& cliqueMaxima, int numVertices, int vInicial) {
+    if (atualClique.size() > cliqueMaxima.size()) {
+        cliqueMaxima = atualClique;
+    }
 
-    for (size_t i = 0; i < vertices.size(); ++i) {
-        for (size_t j = i + 1; j < vertices.size(); ++j) {
-            int v1 = vertices[i];
-            int v2 = vertices[j];
-            if (grafo[v1][v2] == 0) {
-                cout << "Aresta faltando entre " << v1 + 1 << " e " << v2 + 1 << endl;
-                return false;
+    for (int v = vInicial; v < numVertices; ++v) {
+        bool adjacenteATodos = true;
+
+        for (int u : atualClique) {
+            if (grafo[u][v] == 0) { 
+                adjacenteATodos = false;
+                break;
             }
         }
+
+        if (adjacenteATodos) {
+            atualClique.push_back(v); 
+            BuscaCliqueMaxima(grafo, atualClique, cliqueMaxima, numVertices, v + 1);
+            atualClique.pop_back();
+        }
     }
-    return true;
 }
 
-// Função para encontrar a clique máxima usando uma busca exaustiva com poda
-vector<int> EncontrarCliqueMaxima(const vector<vector<int>>& grafo, int numVertices) {
-    vector<int> cliqueMaxima;
-    vector<int> conjuntoAtual;
-    int maiorTamanho = 0;
-
-    for (int i = 1; i < (1 << numVertices); ++i) {
-        conjuntoAtual.clear();
-        for (int j = 0; j < numVertices; ++j) {
-            if (i & (1 << j)) {
-                conjuntoAtual.push_back(j);
-            }
-        }
-
-        if (conjuntoAtual.size() > maiorTamanho && EhClique(grafo, conjuntoAtual)) {
-            cliqueMaxima = conjuntoAtual;
-            maiorTamanho = conjuntoAtual.size();
-        }
-    }
-
+// Função principal para encontrar a clique máxima
+std::vector<int> EncontrarCliqueMaxima(const std::vector<std::vector<int>>& grafo, int numVertices) {
+    std::vector<int> cliqueMaxima;
+    std::vector<int> atualClique;
+    BuscaCliqueMaxima(grafo, atualClique, cliqueMaxima, numVertices, 0);
     return cliqueMaxima;
 }
 
 int main() {
     int numVertices;
-    string nomeArquivo = "grafo.txt";
+    std::string nomeArquivo = "grafo.txt";
+    
+    // Lê o grafo do arquivo
+    std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
 
-    auto inicio = high_resolution_clock::now();
+    auto inicioTotal = std::chrono::high_resolution_clock::now();
+    
+    // Encontra a clique máxima usando a abordagem exaustiva recursiva
+    std::vector<int> cliqueMaxima = EncontrarCliqueMaxima(grafo, numVertices);
+    
+    auto duracaoTotal = std::chrono::duration_cast<std::chrono::duration<double>>(
+                            std::chrono::high_resolution_clock::now() - inicioTotal).count();
 
-    vector<vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
-
-    vector<int> cliqueMaxima = EncontrarCliqueMaxima(grafo, numVertices);
-
-    auto fim = high_resolution_clock::now();
-    auto duracao = duration_cast<milliseconds>(fim - inicio);
-
-    if (!cliqueMaxima.empty()) {
-        cout << "Clique máxima encontrada com tamanho " << cliqueMaxima.size() << ":\n";
-        for (int v : cliqueMaxima) {
-            cout << v + 1 << " ";
-        }
-        cout << endl;
-    } else {
-        cout << "Nenhuma clique encontrada.\n";
+    // Exibe o resultado no terminal
+    std::cout << "Clique máxima encontrada: ";
+    for (int v : cliqueMaxima) {
+        std::cout << v + 1 << " "; 
     }
+    std::cout << std::endl;
 
-    cout << "Tempo de execução: " << duracao.count() << " ms" << endl;
+    std::cout << "Tamanho da clique máxima: " << cliqueMaxima.size() << std::endl;
+
+    std::cout << std::fixed << std::setprecision(6);
+    std::cout << "Tempo total de execução: " << duracaoTotal << " segundos" << std::endl;
 
     return 0;
 }
+
+
 
 
 
