@@ -2,12 +2,11 @@
 #include <vector>
 #include <algorithm>
 #include <chrono>
-#include <string>
 #include <fstream>
 #include <iomanip>
 #include <numeric> // Para std::iota
 
-// Função para ler o grafo a partir do arquivo de entrada
+// Função para ler o grafo a partir de um arquivo
 std::vector<std::vector<int>> LerGrafo(const std::string& nomeArquivo, int& numVertices) {
     std::ifstream arquivo(nomeArquivo);
     if (!arquivo.is_open()) {
@@ -27,77 +26,73 @@ std::vector<std::vector<int>> LerGrafo(const std::string& nomeArquivo, int& numV
         grafo[v - 1][u - 1] = 1;
     }
 
-    arquivo.close();
     return grafo;
 }
 
-// Função que verifica se um vértice é conectado a todos os vértices da clique atual
-bool ConectadoATodos(const std::vector<std::vector<int>>& grafo, const std::vector<int>& cliqueAtual, int v) {
-    for (int u : cliqueAtual) {
-        if (grafo[u][v] == 0) {
-            return false;
+// Função recursiva com poda para encontrar a clique máxima
+void BuscarCliqueComPoda(const std::vector<std::vector<int>>& grafo, std::vector<int>& atualClique, 
+                         std::vector<int>& cliqueMaxima, std::vector<int>& candidatos, int& maxTamanho) {
+    if (atualClique.size() + candidatos.size() <= maxTamanho) return;
+
+    while (!candidatos.empty()) {
+        int v = candidatos.back();
+        candidatos.pop_back();
+
+        std::vector<int> novosCandidatos;
+        for (int u : candidatos) {
+            if (grafo[v][u] == 1) {
+                novosCandidatos.push_back(u);
+            }
         }
-    }
-    return true;
-}
 
-// Função recursiva para encontrar a clique máxima com poda
-void ExplorarClique(const std::vector<std::vector<int>>& grafo, std::vector<int>& cliqueAtual,
-                    std::vector<int>& melhorClique, std::vector<int>& candidatos) {
-    if (cliqueAtual.size() + candidatos.size() <= melhorClique.size()) {
-        return; // Poda: Não pode superar a melhor clique conhecida
-    }
-
-    if (cliqueAtual.size() > melhorClique.size()) {
-        melhorClique = cliqueAtual;
-    }
-
-    for (size_t i = 0; i < candidatos.size(); ++i) {
-        int v = candidatos[i];
-        if (ConectadoATodos(grafo, cliqueAtual, v)) {
-            cliqueAtual.push_back(v);
-
-            std::vector<int> novosCandidatos(candidatos.begin() + i + 1, candidatos.end());
-            ExplorarClique(grafo, cliqueAtual, melhorClique, novosCandidatos);
-
-            cliqueAtual.pop_back();
+        atualClique.push_back(v);
+        if (atualClique.size() > cliqueMaxima.size()) {
+            cliqueMaxima = atualClique;
+            maxTamanho = cliqueMaxima.size();
         }
+
+        BuscarCliqueComPoda(grafo, atualClique, cliqueMaxima, novosCandidatos, maxTamanho);
+        atualClique.pop_back();
     }
 }
 
-// Função principal para encontrar a clique máxima
-std::vector<int> EncontrarCliqueMaximaHeuristica(const std::vector<std::vector<int>>& grafo, int numVertices) {
-    std::vector<int> melhorClique;
-    std::vector<int> cliqueAtual;
+// Função principal para encontrar clique máxima com poda
+std::vector<int> EncontrarCliqueMaximaHeuristica(const std::vector<std::vector<int>>& grafo) {
+    int numVertices = grafo.size();
     std::vector<int> candidatos(numVertices);
-    std::iota(candidatos.begin(), candidatos.end(), 0); // Preenche com 0, 1, ..., numVertices-1
+    std::iota(candidatos.begin(), candidatos.end(), 0); // Inicializa com 0, 1, ..., numVertices-1
 
-    ExplorarClique(grafo, cliqueAtual, melhorClique, candidatos);
-    return melhorClique;
+    std::vector<int> cliqueMaxima;
+    std::vector<int> atualClique;
+    int maxTamanho = 0;
+
+    BuscarCliqueComPoda(grafo, atualClique, cliqueMaxima, candidatos, maxTamanho);
+    return cliqueMaxima;
 }
 
 int main() {
     int numVertices;
-    std::string nomeArquivo = "grafo.txt";
+    std::string nomeArquivo = "grafo150.txt";
 
     std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
+    if (grafo.empty()) return 1;
 
-    auto inicioTotal = std::chrono::high_resolution_clock::now();
+    auto inicio = std::chrono::high_resolution_clock::now();
+    std::vector<int> cliqueMaxima = EncontrarCliqueMaximaHeuristica(grafo);
+    auto fim = std::chrono::high_resolution_clock::now();
 
-    std::vector<int> cliqueMaxima = EncontrarCliqueMaximaHeuristica(grafo, numVertices);
+    double duracao = std::chrono::duration_cast<std::chrono::duration<double>>(fim - inicio).count();
 
-    auto duracaoTotal = std::chrono::duration_cast<std::chrono::duration<double>>(
-                            std::chrono::high_resolution_clock::now() - inicioTotal).count();
-
-    std::cout << "Clique máxima encontrada -> ";
+    std::cout << "Clique máxima encontrada: ";
     for (int v : cliqueMaxima) {
         std::cout << v + 1 << " ";
     }
-    std::cout << "\nTamanho da clique máxima -> " << cliqueMaxima.size() << std::endl;
-
-    std::cout << std::fixed << std::setprecision(6);
-    std::cout << "Tempo total de execução -> " << duracaoTotal << " segundos" << std::endl;
+    std::cout << "\nTamanho da clique máxima: " << cliqueMaxima.size() << std::endl;
+    std::cout << std::fixed << std::setprecision(6) << "Tempo total de execução: " << duracao << " segundos\n";
 
     return 0;
 }
+
+
+
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=exaustpoda
-#SBATCH --output=output_exaustpoda.txt
+#SBATCH --output=output_exaustpoda150.txt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=1Gb

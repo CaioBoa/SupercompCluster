@@ -66,7 +66,7 @@ std::vector<int> ObterMaiorClique(const std::vector<std::vector<int>>& matrizAdj
 
 int main() {
     int totalVertices;
-    std::string caminhoArquivo = "grafo.txt";
+    std::string caminhoArquivo = "grafo150.txt";
 
     // Carrega o grafo do arquivo especificado
     std::vector<std::vector<int>> matrizAdjacencia = CarregarGrafo(caminhoArquivo, totalVertices);

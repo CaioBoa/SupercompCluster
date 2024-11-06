@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=exaust
-#SBATCH --output=output_exaust.txt
+#SBATCH --output=output_exaust150.txt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=1Gb
