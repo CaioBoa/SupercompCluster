@@ -72,7 +72,7 @@ std::vector<int> EncontrarCliqueMaximaHeuristica(const std::vector<std::vector<i
 
 int main() {
     int numVertices;
-    std::string nomeArquivo = "grafo150.txt";
+    std::string nomeArquivo = "grafo180.txt";
 
     std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
     if (grafo.empty()) return 1;
