@@ -1,2 +1,0 @@
-Número total de proteínas inicializadas (AUG): 25785550
-Tempo total de execução: 26.091 segundos.

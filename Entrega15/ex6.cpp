@@ -12,7 +12,6 @@ int main(int argc, char** argv) {
     int response;
 
     if (rank == 0) {
-
         for (int i = 1; i < size; ++i) {
             std::cout << "Processo 0 enviando mensagem para o processo " << i << std::endl;
             MPI_Send(&message, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
