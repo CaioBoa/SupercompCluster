@@ -1,0 +1,14 @@
+O paralelismo se trata de uma tecninca utilizada em computação para aumentar o desempenho de algoritmos e maximizar o uso da maquina.
+
+Para o entendimento do paralelismo pode se fazer a analogia de ônibus em relação a uma moto, uma vez que enquanto uma moto pode ser muito
+mais veloz para locomoção, um ônibus de maneira lenta é capaz de levar muito mais passageiros, possibilitando que, embora a moto seja 
+individualmente mais veloz, um ônibus seja capaz de transportar um número maior de passageiros em menor tempo.
+
+O paralelismo pode ser desenvolvido de diversas formas, seja por uso de memoria compartilhada em diversas CPUs, uso de GPUs ou comunicação
+de máquinas entre clusters.
+
+Os ganhos do paralelismo costumam se tornar visíveis apenas a partir de determinadas entradas de dados, uma vez que o overhead necessário
+para sua utilização é consíderavel, prejudicando entradas de dados menores.
+
+A escalabilidade do paralelismo surge da possibilidade de aumentar a eficiência para entradas maiores de dados, gerando maior desempenho
+para o algoritmo utilizado.

@@ -1,0 +1,4 @@
+Mean : 5
+Max : 10
+Prod : 3628800
+Tempo de Execução : 2.141e-06

@@ -1,0 +1,11 @@
+O balanceamento de carga é de suma importância para a paralelização, uma vez que o mesmo define quais pacotes de dados serão enviados para
+cada processo, impactando diretamente na possibilidade de obter ganhos através do paralelismo ou não.
+
+Para a paralelização ser efetiva em aumentar o desempenho de seu código é importante que os dados estejam distribuidos corretamente entre
+os processos, pois de nada adianta um processo receber uma carga mínima de trabalho e finalizar rapidamente enquanto outro processo 
+recebe cargas maiores de trabalho e leva um tempo maior para tal, portanto é interessante dividir as cargas de trabalho de maneira a
+aproveitar o máximo de todos os processos.
+
+Existem várias estratégias para otimizar o balanceamento de carga, dentre elas o uso do balanceamento dinâmico, que atribui cargas de trabalho
+aos processos quando os mesmos terminam a execução da carga anterior, ou balanceamentos inteligentes, aumentando a carga no ínicio da execução
+e reduzindo ao final, possibilitando maior desempenho no início e evitando desbalanceamento no final da execução.

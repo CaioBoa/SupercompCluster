@@ -1,0 +1,4 @@
+Mean : 5e+07
+Max : 100000000
+Prod : 0
+Tempo de Execução : 0.260492

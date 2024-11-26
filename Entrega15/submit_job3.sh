@@ -4,7 +4,8 @@
 #SBATCH --ntasks=4                 # Número total de tarefas MPI
 #SBATCH --cpus-per-task=1          # Número de CPUs por tarefa
 #SBATCH --mem-per-cpu=1Gb          # Memória por CPU
-#SBATCH --time=00:05:00            # Tempo máximo de execução
+#SBATCH --time=00:20:00           # Tempo máximo de execução
+#SBATCH --partition=normal
 
 # Executar o programa MPI com o número de tarefas especificado
 mpirun ./ex3       # Use mpirun ou srun, dependendo do sistema
